@@ -104,7 +104,11 @@ def recruitMon(mon):
                 cursor.execute("""INSERT INTO pokemon (id, name, types) VALUES (?, ?, ?)""",
                                (monJson["id"], monJson["name"], types))
                 if monJson["sprites"].get("other", "None") != "None" and monJson["sprites"]["other"].get("official-artwork", "None") != "None":
-                    webbrowser.open(monJson["sprites"]["other"]["official-artwork"]["front_default"])
+                    if random.randint(1, 4096) == 22:
+                        print("what luck!")
+                        webbrowser.open(monJson["sprites"]["other"]["official-artwork"]["front_shiny"])
+                    else:
+                        webbrowser.open(monJson["sprites"]["other"]["official-artwork"]["front_default"])
                 else:
                     webbrowser.open(monJson["sprites"]["front_default"]) # unreachable, but cute pixelated sprite
             except json.JSONDecodeError as e:
